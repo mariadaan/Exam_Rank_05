@@ -7,6 +7,7 @@
 
 // class ASpell;
 #include "ASpell.hpp"
+#include "SpellBook.hpp"
 
 class	Warlock
 {
@@ -28,9 +29,10 @@ private:
 	Warlock(const Warlock&);
 	Warlock& operator=(const Warlock&);
 
+	SpellBook				*_spellBook;
 	std::string				_name;
 	std::string				_title;
-	std::vector<ASpell *>	_mySpells;
+	// std::vector<ASpell *>	_mySpells;
 };
 
 

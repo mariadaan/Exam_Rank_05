@@ -5,6 +5,11 @@
 // 	std::cout << this->_name << ": My job here is done!" << std::endl;
 // }
 
+std::vector<ASpell *> SpellBook::getBook(void) const
+{
+	return this->_myBook;
+}
+
 void SpellBook::learnSpell(ASpell *spell)
 {
 	std::vector<ASpell *>::iterator it = this->_myBook.begin();
@@ -13,7 +18,7 @@ void SpellBook::learnSpell(ASpell *spell)
 		if ((*it)->getName() == spell->getName())
 			return ;
 	}
-	this->_myBook.push_back(spell);
+	this->_myBook.push_back(spell->clone());
 }
 
 void SpellBook::forgetSpell(std::string const &spellName)
@@ -26,15 +31,19 @@ void SpellBook::forgetSpell(std::string const &spellName)
 	}
 }
 
-void SpellBook::launchSpell(std::string const &spellName)
+ASpell* SpellBook::createSpell(std::string const &spellName)
 {
-	std::vector<ASpell *>::iterator it = this->_myBook.begin();
-	for (; it < this->_myBook.end(); it++)
-	{
-		if ((*it)->getName() == spellName)
-			(*it)->launch(target);
-			// std::cout << (*it)->getName() << std::endl;
-			
-	}
+	if (spellName == "Fireball")
+		return new Fireball();
+	else if (spellName == "Polymorph")
+		return new Polymorph();
+	else if (spellName == "Fwoosh")
+		return new Fwoosh();
+	else
+		return NULL;
+	/* 
+	ASpell* createSpell(string const &), that receives a string corresponding to
+	the name of a spell, creates it, and returns it.
+	 */
 }
 
